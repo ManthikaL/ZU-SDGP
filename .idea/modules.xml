@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/pycharmpro.iml" filepath="$PROJECT_DIR$/.idea/pycharmpro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../L5- SEM 2/SDGP - Implementation/Exercise files/ratings-button/.idea/ratings-button.iml" filepath="$PROJECT_DIR$/../L5- SEM 2/SDGP - Implementation/Exercise files/ratings-button/.idea/ratings-button.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../L5- SEM 2/SDGP - Implementation/Exercise files/ratingssection/.idea/ratingssection.iml" filepath="$PROJECT_DIR$/../L5- SEM 2/SDGP - Implementation/Exercise files/ratingssection/.idea/ratingssection.iml" />
+    </modules>
+  </component>
+</project>
