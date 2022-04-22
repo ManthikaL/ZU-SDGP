@@ -1,3 +1,4 @@
+# from FlaskIntro import mainModel
 from FlaskIntro import model1
 from FlaskIntro import model2
 from FlaskIntro import model3
@@ -36,16 +37,20 @@ def index():
         return render_template('index.html')
 
 
-@app.route('/save-feedback', methods = ['POST'])
+@app.route('/save-feedback', methods=['POST'])
 def save_feedback():
     if request.method == 'POST':
         id = request.json['id']
         feedback = request.json['feedbackText'];
         print('id', id);
         print('feedback', feedback);
-
         X = string.addNewReview(feedback)
         print(X)
+        # newHeadRating = 1
+        #
+        # if(id == 1):
+        #     newHeadRating = model1.addNewReview(X)
+
         response = {'feedbackType': X[0]}
         return jsonify(response)
 

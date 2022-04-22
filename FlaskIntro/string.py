@@ -1,65 +1,50 @@
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-import nltk
-from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
+import pickle
+import os.path
+
+# loading the trained model from pickle file
+
+if os.path.exists("trained_model.pickle"):
+    print("Loading Trained Model")
+    clf = pickle.load(open("trained_model.pickle", "rb"))
+else:
+    print("nope")
+
+# loading the vectorizer in trained model from pickle file
+import os.path
+
+if os.path.exists("vectorizer.pickle"):
+    print("vectorizer loading")
+    vec = pickle.load(open("vectorizer.pickle", 'rb'))
+else:
+    print("nope v")
+
+# preprocessing the newly added review
 import re
-
-df = pd.read_csv("Amazon_Unlocked_Mobile new 03.csv")
-
-df.isna().sum()
-
-pd.set_option('display.max_colwidth', None)
-df = df[['Rating', 'Reviews']]
-df.dropna(inplace=True)
-
-df.isna().sum()
-
-
-def LableFunc(rating):
-    if rating >= 3.0:
-        return 'positive'
-    else:
-        return 'negative'
-
-
-df['Label'] = df['Rating'].apply(LableFunc)
-
-print(df['Label'].value_counts())
 
 
 def clean_url(review_text):
     return re.sub(r'http\S+', '', review_text)
 
 
-df['CleanReview'] = df['Reviews'].apply(clean_url)
-
-
 def clean_non_alphanumeric(review_text):
     return re.sub('[^a-zA-Z]', ' ', review_text)
-
-
-df['CleanReview'] = df['CleanReview'].apply(clean_non_alphanumeric)
 
 
 def clean_lowercase(review_text):
     return str(review_text).lower()
 
 
-df['CleanReview'] = df['CleanReview'].apply(clean_lowercase)
+import nltk
+from nltk.tokenize import word_tokenize
 
 
 def clean_tokenization(review_text):
     return word_tokenize(review_text)
 
 
-df['CleanReview'] = df['CleanReview'].apply(clean_tokenization)
-
 nltk.download('stopwords')
-stopwords.words('english')
+from nltk.corpus import stopwords
+
 stop_words = set(stopwords.words('english'))
 
 
@@ -67,9 +52,8 @@ def clean_stopwords(token):
     return [item for item in token if item not in stop_words]
 
 
-df['CleanReview'] = df['CleanReview'].apply(clean_stopwords)
+from nltk.stem import WordNetLemmatizer
 
-nltk.download('omw-1.4')
 lemma = WordNetLemmatizer()
 
 
@@ -77,81 +61,32 @@ def clean_lemmatization(token):
     return [lemma.lemmatize(word=w, pos='v') for w in token]
 
 
-df['CleanReview'] = df['CleanReview'].apply(clean_lemmatization)
-
-
-def Clean_length(token):
+def clean_length(token):
     return [i for i in token if len(i) > 2]
 
 
-df['CleanReview'] = df['CleanReview'].apply(Clean_length)
+def clean_phone(token):
+    return [i for i in token if i != 'phone']
 
 
 def convert_to_string(listReview):
     return ' '.join(listReview)
 
 
-df['CleanReview'] = df['CleanReview'].apply(convert_to_string)
-
-print(df.head(15))
-
-positiveCount = df['Label'].value_counts().positive
-negativeCount = df['Label'].value_counts().negative
-
-print("positiveCount = ", positiveCount)
-print("negativeCount = ", negativeCount)
-
-trueRating = positiveCount / (positiveCount + negativeCount) * 100
-print("True Rating = ", trueRating)
-
-print(df.shape)
-print(df.info)
-
-y = df['Label']
-print(y.head(10))
-x = df['CleanReview']
-print(x.head(10))
-
-##############################
-
-# divide dataset into training and testing set
-from sklearn.model_selection import train_test_split
-
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3)
-
-# training set shape(number of rows and columns)
-print("Train Count : ", x_train.shape)
-
-# testing set shape(number of rows and columns)
-print("Test Count : ", x_test.shape)
-
-df['Label'] = df['Label'].astype('str')
-df['CleanReview'] = df['CleanReview'].astype('str')
-
-df.drop(labels=['Reviews', 'Rating'], axis=1, inplace=True)
-
-from sklearn.feature_extraction.text import TfidfVectorizer
-
-vectorizer = TfidfVectorizer()
-
-X_train = vectorizer.fit_transform(x_train)
-X_test = vectorizer.transform(x_test)
-
-from sklearn.naive_bayes import MultinomialNB
-
-model = MultinomialNB()
-
-MNB = MultinomialNB()
-MNB.fit(X_train, y_train)
-
-print("Accuracy = ", MNB.score(X_test, y_test))
-
-
 # updating the rating for the new review
 def addNewReview(review):
-    prediction = MNB.predict(vectorizer.transform([review]))
+    df = review
+    df = clean_url(df)
+    df = clean_non_alphanumeric(df)
+    df = clean_lowercase(df)
+    df = clean_tokenization(df)
+    df = clean_stopwords(df)
+    df = clean_lemmatization(df)
+    df = clean_length(df)
+    df = clean_phone(df)
+    df = convert_to_string(df)
+    print("Filtered review : ", df)
+
+    prediction = clf.predict(vec.transform([df]))
 
     return prediction
-
-
-
