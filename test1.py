@@ -1,3 +1,3 @@
 # def finalRating(rating):
-#     rating = 100
+#     rating=100
 #     return rating
