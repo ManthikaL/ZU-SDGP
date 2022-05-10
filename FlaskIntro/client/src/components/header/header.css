@@ -1,0 +1,105 @@
+nav, nav ul{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background: #323c5c;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+
+  nav {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    width: 100%;
+    /*color: #b2b8bf;*/
+    font-family: 'Varela Round';
+      /*position: fixed;*/
+  }
+
+  nav .logo {
+    font-size: 30px;
+    text-transform: uppercase;
+    color: #b2b8bf;
+
+
+  }
+
+  nav ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  nav ul li {
+    font-size: 20px;
+    margin-left: 15px;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    color: #b2b8bf;
+    cursor: pointer;
+    text-decoration:none;
+  }
+
+  .link li a{
+    text-decoration:none;
+    color: #b2b8bf;
+  }
+  
+  /*nav .search {*/
+  /*  color: #b2b8bf;*/
+  /*  cursor: pointer;*/
+  /*  margin-left: 15px;*/
+  /*}*/
+
+
+  nav b{
+    color: #fe8033;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+
+/*  #dvLiveSearch{*/
+/*   overflow-anchor: none;*/
+/*}*/
+
+
+.searchbar input{
+    width: 180px;
+    height: 21px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    padding-left: 6px;
+    color: black;
+
+  }
+
+.searchbar button{
+  height: 21px;
+  width: 64px;
+  font-size: 16px;
+    border-radius: 4px;
+
+}
+button:hover{
+  cursor: pointer;
+}
+
+.searchbar{
+    flex:50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 25px;
+  }

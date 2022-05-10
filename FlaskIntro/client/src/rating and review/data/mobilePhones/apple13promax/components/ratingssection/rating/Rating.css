@@ -1,0 +1,13 @@
+* {
+	font-family: Arial, Helvetica, sans-serif;
+	box-sizing: border-box;
+	margin-top: 20;
+	
+}
+
+/*Postive Negative Review showcase*/
+.ratingview {
+	font-size: 35px;
+	color:#fe8033;
+
+}
