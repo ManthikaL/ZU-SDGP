@@ -1,0 +1,60 @@
+nav, nav ul{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+nav {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  color: #b2b8bf;
+  font-family: 'Varela Round'
+}
+
+nav .logo {
+  font-size: 30px;
+  text-transform: uppercase;
+  color: #b2b8bf;
+  
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+nav ul li {
+  font-size: 20px;
+  margin-left: 15px;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: #000000;
+  cursor: pointer;
+}
+
+nav .search {
+  color: rgb(178, 184, 191);
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+nav b{
+  color: #fe8033;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
