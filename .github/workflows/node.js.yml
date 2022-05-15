@@ -26,7 +26,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
     - name: Setup and run tests
       working-directory: ./FlaskIntro/client
     - run: npm ci
